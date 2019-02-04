@@ -1,6 +1,18 @@
 <div class="tickets">
-    <div class="tickets-container">
-      <ng-content></ng-content>
-  </div>
+
+    <div class="tickets__header">
+        <app-ticket-header></app-ticket-header>
+    </div>
+
+    <div class="ticket__content">
+      <div class="tickets__filter">
+          <app-filter></app-filter>
+      </div>
+
+      <div class="tickets__render">
+          <app-ticket></app-ticket>
+      </div>
+    </div>
+
 </div>
 

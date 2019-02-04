@@ -5,11 +5,9 @@
   justify-content: space-between
   max-width: 566px
   min-height: 160px
-  margin: 0 auto
   background-color: #fff
   box-shadow: 0 1px 4px rgba(91, 137, 164, 0.25)
   border-radius: 5px
-
 
 .ticket__airlines
   display: flex
@@ -33,6 +31,15 @@
   font-size: 16px
   font-weight: $font-semi-bold
   color: #fff
+  transition: background-color 0.2s ease-in
+
+  &:hover,
+  &:focus
+    cursor: pointer
+    background-color: $secondary-light
+
+  &:active
+    background-color: darken($secondary-light, 5%)
 
 .ticket__price
   display: block
@@ -92,4 +99,3 @@
 .ticket__place-departure
 
 .ticket__place-arrival
-

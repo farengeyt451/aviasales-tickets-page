@@ -1,8 +1,20 @@
+@import '~src/common/index'
+
 .tickets
-
-
-.tickets-container
   min-height: 100vh
   max-width: 1024px
-  background-color: #f3f7fa
+  background-color: $primary-light
   margin: 0 auto
+
+.ticket__content
+  display: flex
+  justify-content: space-between
+  margin-top: 30px
+  padding: 0px 85px
+
+.tickets__filter
+  flex-grow: 1
+  margin-right: 20px
+
+.tickets__render
+  flex-basis: 70%

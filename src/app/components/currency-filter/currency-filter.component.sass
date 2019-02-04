@@ -1,0 +1,55 @@
+@import '~src/common/index'
+
+.currency-filter
+
+.currency-filter__caption
+  font-size: 12px
+  font-weight: $font-semi-bold
+  color: #4a4a4a
+  letter-spacing: 0.5px
+  text-transform: uppercase
+
+.currency-filter__options
+  display: flex
+  justify-content: center
+  margin-top: 10px
+
+.currency-filter__label
+  flex-basis: 33.3%
+
+  &:first-child
+    .currency-filter__signs
+      border-radius: 5px 0 0 5px
+      border-right: none
+
+  &:last-child
+    .currency-filter__signs
+      border-radius: 0 5px 5px 0
+      border-left: none
+
+.currency-filter__signs
+  display: block
+  padding: 10px
+  border: 1px solid #d2d5d6
+  font-size: 12px
+  font-weight: $font-semi-bold
+  color: $primary
+  text-align: center
+  letter-spacing: 0.5px
+  text-transform: uppercase
+  transition: background-color 0.2s ease-in
+
+  &:hover
+    border: 1px solid $primary
+    cursor: pointer
+    background-color: $primary-light
+
+  &:foucs
+    border: 2px solid $primary
+
+.currency-filter__radio
+  +visually-hidden
+
+.currency-filter__radio:checked + .currency-filter__signs
+  color: #fff
+  background-color: $primary

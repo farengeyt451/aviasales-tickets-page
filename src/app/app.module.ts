@@ -3,13 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header';
-import { FooterComponent } from './components/footer';
+
+import { IndexPageComponent } from './components/index-page';
+import { TicketHeaderComponent } from './components/ticket-header';
 import { TicketComponent } from './components/ticket';
-import { IndexPageComponent } from './components/index-page/index-page.component';
+import { FilterComponent } from './components/filter';
+import { CurrencyFilterComponent } from './components/currency-filter';
+import { TransfersFilterComponent } from './components/transfers-filter';
+import { FooterComponent } from './components/shared/footer';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, TicketComponent, IndexPageComponent],
+  declarations: [
+    AppComponent,
+    IndexPageComponent,
+    TicketHeaderComponent,
+    TicketComponent,
+    FilterComponent,
+    FooterComponent,
+    CurrencyFilterComponent,
+    TransfersFilterComponent
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
