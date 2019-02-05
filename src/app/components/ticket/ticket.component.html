@@ -21,14 +21,14 @@
       <div class="ticket__place-departure">
         <div class="ticket__city"> {{ renderTicket.origin }}, {{ renderTicket.origin_name }}</div>
         <div class="ticket__date">{{ renderTicket.departure_date}}
-          {{ setDate(renderTicket.departure_date) | date: 'dd/MM/yyyy' | date: 'EEE' | titlecase}} </div>
+          {{ setDate(renderTicket.departure_date) | date: 'EEE' | titlecase}} </div>
       </div>
 
       <div class="ticket__place-arrival">
         <div class="ticket__city">{{ renderTicket.destination_name }},
           {{ renderTicket.destination }}</div>
         <div class="ticket__date ticket__date--right">{{ renderTicket.arrival_date}}
-          {{ setDate(renderTicket.arrival_date) | date: 'dd/MM/yyyy' | date: 'EEE' | titlecase}}</div>
+          {{ setDate(renderTicket.arrival_date) | date: 'EEE' | titlecase}}</div>
       </div>
     </div>
 
