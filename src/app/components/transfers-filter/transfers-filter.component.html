@@ -4,7 +4,13 @@
 
   <div class="transfers-filter__options">
 
-  </div>
+    <label class="transfers-filter__option"
+           *ngFor="let stop of stops"
+    >
+      <input class="transfers-filter__chose" type="checkbox" [value]="stop.stopCount">
+      <span class="transfers-filter__text">{{ stop.option }}</span>
+    </label>
 
+  </div>
 </div>
 

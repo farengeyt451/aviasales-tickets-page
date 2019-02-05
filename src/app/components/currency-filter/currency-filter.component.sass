@@ -3,6 +3,7 @@
 .currency-filter
 
 .currency-filter__caption
+  margin: 3px 0
   font-size: 12px
   font-weight: $font-semi-bold
   color: #4a4a4a
@@ -12,9 +13,9 @@
 .currency-filter__options
   display: flex
   justify-content: center
-  margin-top: 10px
+  margin-top: 15px
 
-.currency-filter__label
+.currency-filter__option
   flex-basis: 33.3%
 
   &:first-child
@@ -29,7 +30,7 @@
 
 .currency-filter__signs
   display: block
-  padding: 10px
+  padding: 12px 20px
   border: 1px solid #d2d5d6
   font-size: 12px
   font-weight: $font-semi-bold
@@ -37,19 +38,19 @@
   text-align: center
   letter-spacing: 0.5px
   text-transform: uppercase
-  transition: background-color 0.2s ease-in
+  transition: background-color 0.2s ease-in, border-color 0.2s ease-out
 
   &:hover
     border: 1px solid $primary
     cursor: pointer
     background-color: $primary-light
 
-  &:foucs
+  &:focus
     border: 2px solid $primary
 
-.currency-filter__radio
+.currency-filter__chose
   +visually-hidden
 
-.currency-filter__radio:checked + .currency-filter__signs
+.currency-filter__chose:checked + .currency-filter__signs
   color: #fff
   background-color: $primary
