@@ -13,4 +13,9 @@ export class TicketComponent implements OnInit {
   ngOnInit() {
     console.log(this.renderTicket);
   }
+
+  setDate(date: string): Date {
+    // let dateParts = date.split('.');
+    return new Date(date);
+  }
 }
