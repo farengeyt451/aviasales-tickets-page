@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ITickets } from '../../interfaces/tickets.interface';
 
 @Component({
   selector: 'app-ticket',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ticket.component.sass']
 })
 export class TicketComponent implements OnInit {
-
-  constructor() { }
+  @Input() renderTicket: ITickets;
+  constructor() {}
 
   ngOnInit() {
+    console.log(this.renderTicket);
   }
-
 }

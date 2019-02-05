@@ -10,7 +10,7 @@
       </div>
 
       <div class="tickets__render">
-          <app-ticket></app-ticket>
+          <app-ticket *ngFor="let ticket of tickets" [renderTicket]="ticket"></app-ticket>
       </div>
     </div>
 

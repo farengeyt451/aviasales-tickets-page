@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { STOPS } from '../../fixtures/stops.fixture';
+import { IStops } from '../../interfaces/stops.interface';
 
 @Component({
   selector: 'app-transfers-filter',
@@ -7,11 +8,9 @@ import { STOPS } from '../../fixtures/stops.fixture';
   styleUrls: ['./transfers-filter.component.sass']
 })
 export class TransfersFilterComponent implements OnInit {
-  public stops: Array<Object> = STOPS;
+  public stops: Array<IStops> = STOPS;
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.stops);
-  }
+  ngOnInit() {}
 }

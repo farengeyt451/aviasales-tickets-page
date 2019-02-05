@@ -8,7 +8,7 @@ export class TicketsService {
   constructor(private http: HttpClient) {}
 
   getTickets() {
-    return this.http.get('/data/tickets.json').pipe(
+    return this.http.get('/assets/data/tickets.json').pipe(
       map(response => response),
       catchError(err => {
         return throwError(err);

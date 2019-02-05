@@ -1,26 +1,32 @@
 <div class="ticket">
-
   <div class="ticket__airlines">
     <img class="ticket__logo" src="assets/images/ticket/turkish-airlines-logo.png">
-    <button type="button" class="ticket__buy">Купить <span class="ticket__price">за 21 032 ₽</span> </button>
+    <button type="button" class="ticket__buy">Купить
+      <span class="ticket__price">
+      за {{ renderTicket.price }} ₽
+      </span>
+    </button>
   </div>
 
   <div class="ticket__flight">
-
+    <!-- TODO -->
+    <!-- Worlds ending пересадка - пересадки ... -->
     <div class="ticket__timing">
-      <div class="ticket__time ticket__time-departure">09:25</div>
-      <div class="ticket__transfer">1 пересадка</div>
-      <div class="ticket__time ticket__time-arrival">11:45</div>
+      <div class="ticket__time ticket__time-departure">{{ renderTicket.departure_time }}</div>
+      <div class="ticket__transfer">{{ renderTicket.stops }} пересадка</div>
+      <div class="ticket__time ticket__time-arrival">{{ renderTicket.arrival_time }}</div>
     </div>
 
     <div class="ticket__place">
       <div class="ticket__place-departure">
-        <div class="ticket__city"> VVO, Владивосток</div>
-        <div class="ticket__date">9 окт 2018, Пт</div>
+        <div class="ticket__city"> {{ renderTicket.origin }}, {{ renderTicket.origin_name }}</div>
+        <div class="ticket__date">{{ renderTicket.departure_date}}
+          {{ renderTicket.departure_date | date: 'dd/MM/yyyy' | date: 'E' | titlecase}} </div>
       </div>
       <div class="ticket__place-arrival">
-        <div class="ticket__city">Тель-Авив, TLV</div>
-        <div class="ticket__date ticket__date--right">10 окт 2018, Пт</div>
+        <div class="ticket__city">{{ renderTicket.destination_name }}, {{ renderTicket.destination }}</div>
+        <div class="ticket__date ticket__date--right">{{ renderTicket.arrival_date}}
+          {{ renderTicket.departure_date | date: 'dd/MM/yyyy' | date: 'E' | titlecase}}</div>
       </div>
     </div>
 

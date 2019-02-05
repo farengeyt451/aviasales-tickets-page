@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TicketsService } from '../../services/tickets.service';
+import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -6,25 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index-page.component.sass']
 })
 export class IndexPageComponent implements OnInit {
-  tickets: Array<Object>;
+  tickets: Array<ITickets>;
 
-  constructor() {}
+  constructor(private ticketsService: TicketsService) {}
 
   ngOnInit() {
-    // this.getTickets();
+    this.getTickets();
   }
 
-  // getTickets() {
-  //   this.ticketService.getTickets().subscribe(
-  //     responce => {
-  //       console.log(responce);
-  //     },
-  //     err => {
-  //       console.log(err);
-  //     },
-  //     () => {
-  //       console.log('complete');
-  //     }
-  //   );
-  // }
+  getTickets() {
+    this.ticketsService.getTickets().subscribe(
+      (responce: ITicketsResponce) => {
+        console.log(responce);
+        this.tickets = responce.tickets;
+      },
+      err => {
+        alert(err.message);
+        // TODO Add popup
+      },
+      () => {
+        console.log('Async data fetching from local server complete');
+      }
+    );
+  }
 }
