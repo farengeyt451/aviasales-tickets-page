@@ -5,7 +5,7 @@
 .transfers-filter__caption
   font-size: 12px
   font-weight: $font-semi-bold
-  color: #4a4a4a
+  color: $text
   letter-spacing: 0.5px
   text-transform: uppercase
   margin: 0
@@ -15,24 +15,28 @@
 
 
 .transfers-filter__option
+  position: relative
   display: block
-  padding: 10px 18px
+  padding: 7px 18px
   transition: background-color 0.3s ease
 
   &:hover
     cursor: pointer
     background-color: $primary-light
 
+    .transfers-filter__only
+      color: $primary
+
 .transfers-filter__chose
   +visually-hidden
 
 .transfers-filter__text
-  display: block
+  display: inline-block
   position: relative
   padding-left: 30px
   font-size: 13px
-  color: #4a4a4a
-  line-height: 1
+  color: $text
+  line-height: 1.4
 
   &:before
     content: ''
@@ -47,10 +51,28 @@
     border: 1px solid #d2d5d6
     background-color: #fff
 
-
 .transfers-filter__chose:checked + .transfers-filter__text
   &:before
+    border-color: $primary
     background-image: url('/assets/images/filter/checked.svg')
     background-repeat: no-repeat
     background-position: center
     background-size: 70%
+
+.transfers-filter__only
+  background-color: transparent
+  border: none
+  outline: none
+  position: absolute
+  right: 20px
+  top: 50%
+  transform: translateY(-50%)
+  color: transparent
+  font-size: 11px
+  font-weight: $font-semi-bold
+  text-transform: uppercase
+  letter-spacing: 0.5px
+  transition: color 0.1s ease
+
+  &:hover
+    cursor: pointer

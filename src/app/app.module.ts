@@ -12,6 +12,8 @@ import { CurrencyFilterComponent } from './components/currency-filter';
 import { TransfersFilterComponent } from './components/transfers-filter';
 import { FooterComponent } from './components/shared/footer';
 
+import { TicketsService } from './services/tickets.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,7 @@ import { FooterComponent } from './components/shared/footer';
     TransfersFilterComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  providers: [TicketsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

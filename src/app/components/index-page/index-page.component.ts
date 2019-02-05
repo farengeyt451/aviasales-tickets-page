@@ -6,10 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index-page.component.sass']
 })
 export class IndexPageComponent implements OnInit {
+  tickets: Array<Object>;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    // this.getTickets();
   }
 
+  // getTickets() {
+  //   this.ticketService.getTickets().subscribe(
+  //     responce => {
+  //       console.log(responce);
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     },
+  //     () => {
+  //       console.log('complete');
+  //     }
+  //   );
+  // }
 }
