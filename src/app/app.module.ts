@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // For global language settings
 import { LOCALE_ID } from '@angular/core';
@@ -19,6 +20,7 @@ import { TransfersFilterComponent } from './components/transfers-filter';
 import { FooterComponent } from './components/shared/footer';
 
 import { TicketsService } from './services/tickets.service';
+import { CurrencyService } from './services/currency.service';
 
 registerLocaleData(localeRu);
 
@@ -33,12 +35,12 @@ registerLocaleData(localeRu);
     CurrencyFilterComponent,
     TransfersFilterComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
 
   // For global language settings
   // providers: [TicketsService, { provide: LOCALE_ID, useValue: 'ru-RU' }],
 
-  providers: [TicketsService],
+  providers: [TicketsService, CurrencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
