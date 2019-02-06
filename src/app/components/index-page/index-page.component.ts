@@ -19,7 +19,6 @@ export class IndexPageComponent implements OnInit {
   getTickets() {
     this.ticketsService.getTickets().subscribe(
       (responce: ITicketsResponce) => {
-        console.log(responce);
         this.tickets = responce.tickets;
       },
       err => {
@@ -27,7 +26,7 @@ export class IndexPageComponent implements OnInit {
         // TODO Add popup
       },
       () => {
-        console.log('Async data fetching from local server complete');
+        console.log('Async fetching data from local server complete');
       }
     );
   }

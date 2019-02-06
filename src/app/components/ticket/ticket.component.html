@@ -3,17 +3,16 @@
     <img class="ticket__logo" src="assets/images/ticket/turkish-airlines-logo.png">
     <button type="button" class="ticket__buy">Купить
       <span class="ticket__price">
-      за {{ renderTicket.price }} ₽
+      за {{ renderTicket.price | currency : 'RUB': 'symbol': '1.0-4' :'ru'}}
       </span>
     </button>
   </div>
 
   <div class="ticket__flight">
-    <!-- TODO -->
-    <!-- Worlds ending пересадка - пересадки ... -->
     <div class="ticket__timing">
       <div class="ticket__time ticket__time-departure">{{ renderTicket.departure_time }}</div>
-      <div class="ticket__transfer">{{ renderTicket.stops }} пересадка</div>
+      <div class="ticket__transfer">{{ renderTicket.stops }}
+        {{ returnDeclension(renderTicket.stops) }}</div>
       <div class="ticket__time ticket__time-arrival">{{ renderTicket.arrival_time }}</div>
     </div>
 
@@ -21,14 +20,14 @@
       <div class="ticket__place-departure">
         <div class="ticket__city"> {{ renderTicket.origin }}, {{ renderTicket.origin_name }}</div>
         <div class="ticket__date">{{ renderTicket.departure_date}}
-          {{ setDate(renderTicket.departure_date) | date: 'EEE' | titlecase}} </div>
+          {{ setDate(renderTicket.departure_date) | date: 'EEE': '': 'ru' | titlecase}} </div>
       </div>
 
       <div class="ticket__place-arrival">
         <div class="ticket__city">{{ renderTicket.destination_name }},
           {{ renderTicket.destination }}</div>
         <div class="ticket__date ticket__date--right">{{ renderTicket.arrival_date}}
-          {{ setDate(renderTicket.arrival_date) | date: 'EEE' | titlecase}}</div>
+          {{ setDate(renderTicket.arrival_date) | date: 'EEE': '': 'ru' | titlecase}}</div>
       </div>
     </div>
 
