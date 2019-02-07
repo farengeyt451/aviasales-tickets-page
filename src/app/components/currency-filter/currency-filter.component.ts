@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
+
 import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
 
 @Component({
@@ -18,7 +19,7 @@ export class CurrencyFilterComponent implements OnInit {
     });
 
     this.currencyForm.controls.currencyType.valueChanges.subscribe(value => {
-      this.convertCurrency(value);
+      this.currencyService.changeCurrencyType(value);
     });
   }
 
@@ -40,9 +41,5 @@ export class CurrencyFilterComponent implements OnInit {
         console.log('Async fetching data from fixer.io server complete');
       }
     );
-  }
-
-  convertCurrency(val: string) {
-    console.log(val);
   }
 }

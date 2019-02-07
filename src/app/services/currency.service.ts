@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable()
 export class CurrencyService {
@@ -17,5 +17,12 @@ export class CurrencyService {
         return throwError(err);
       })
     );
+  }
+
+  private currencyType = new BehaviorSubject('rub');
+  currentCurrencyType = this.currencyType.asObservable();
+
+  changeCurrencyType(cur: string) {
+    this.currencyType.next(cur);
   }
 }

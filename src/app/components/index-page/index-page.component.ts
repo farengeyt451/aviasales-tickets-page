@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { TicketsService } from '../../services/tickets.service';
+import { CurrencyService } from '../../services/currency.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 
 @Component({
@@ -9,11 +11,16 @@ import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 })
 export class IndexPageComponent implements OnInit {
   tickets: Array<ITickets>;
+  currency: string;
 
-  constructor(private ticketsService: TicketsService) {}
+  constructor(private ticketsService: TicketsService, private currencyService: CurrencyService) {}
 
   ngOnInit() {
     this.getTickets();
+    this.currencyService.currentCurrencyType.subscribe(cur => {
+      console.log(cur);
+      this.currency = cur;
+    });
   }
 
   getTickets() {

@@ -25,4 +25,8 @@ export class TicketComponent implements OnInit {
     const titles = ['пересадка', 'пересадки', 'пересадок'];
     return titles[num % 100 > 4 && num % 100 < 20 ? 2 : cases[num % 10 < 5 ? num % 10 : 5]];
   }
+
+  get ticketPrice() {
+    return this.renderTicket.price;
+  }
 }
