@@ -10,6 +10,7 @@ import { LOCALE_ID } from '@angular/core';
 
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import localeEn from '@angular/common/locales/en';
 
 import { IndexPageComponent } from './components/index-page';
 import { TicketHeaderComponent } from './components/ticket-header';
@@ -22,7 +23,7 @@ import { FooterComponent } from './components/shared/footer';
 import { TicketsService } from './services/tickets.service';
 import { CurrencyService } from './services/currency.service';
 
-registerLocaleData(localeRu);
+registerLocaleData(localeRu, localeEn);
 
 @NgModule({
   declarations: [

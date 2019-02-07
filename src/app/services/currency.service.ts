@@ -5,6 +5,9 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CurrencyService {
+  private currencyType = new BehaviorSubject('rub');
+  currentCurrencyType = this.currencyType.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getExchangeRatesUrl: string =
@@ -18,9 +21,6 @@ export class CurrencyService {
       })
     );
   }
-
-  private currencyType = new BehaviorSubject('rub');
-  currentCurrencyType = this.currencyType.asObservable();
 
   changeCurrencyType(cur: string) {
     this.currencyType.next(cur);

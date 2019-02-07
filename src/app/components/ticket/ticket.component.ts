@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ITickets } from '../../interfaces/tickets.interface';
+import { ICurrencyRates } from '../../interfaces/currency.interface';
 
 @Component({
   selector: 'app-ticket',
@@ -8,9 +9,23 @@ import { ITickets } from '../../interfaces/tickets.interface';
 })
 export class TicketComponent implements OnInit {
   @Input() renderTicket: ITickets;
+  @Input() currencyType: string;
+  @Input() curRates: ICurrencyRates;
+  // @Input() set curRates(value) {
+  //   if (value != null) {
+  //     console.log('d');
+  //   }
+  // }
+
+  ticketPrice: number;
+
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.getTicketPrice(changes.currencyType.currentValue);
+  }
 
   setDate(date: string): Date {
     let dateParts = date.split('.');
@@ -26,7 +41,18 @@ export class TicketComponent implements OnInit {
     return titles[num % 100 > 4 && num % 100 < 20 ? 2 : cases[num % 10 < 5 ? num % 10 : 5]];
   }
 
-  get ticketPrice() {
-    return this.renderTicket.price;
+  getTicketPrice(type: string): void {
+    if (type) {
+      switch (type) {
+        case 'usd':
+          this.ticketPrice = this.renderTicket.price * this.curRates.USD;
+          break;
+        case 'eur':
+          this.ticketPrice = this.renderTicket.price * this.curRates.EUR;
+          break;
+        default:
+          this.ticketPrice = this.renderTicket.price;
+      }
+    }
   }
 }
