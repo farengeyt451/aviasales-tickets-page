@@ -11,11 +11,6 @@ export class TicketComponent implements OnInit {
   @Input() renderTicket: ITickets;
   @Input() currencyType: string;
   @Input() curRates: ICurrencyRates;
-  // @Input() set curRates(value) {
-  //   if (value != null) {
-  //     console.log('d');
-  //   }
-  // }
 
   ticketPrice: number;
 
@@ -45,10 +40,11 @@ export class TicketComponent implements OnInit {
     if (type) {
       switch (type) {
         case 'usd':
-          this.ticketPrice = this.renderTicket.price * this.curRates.USD;
+          this.ticketPrice =
+            this.renderTicket.price * (this.curRates.EUR / this.curRates.RUB) * this.curRates.USD;
           break;
         case 'eur':
-          this.ticketPrice = this.renderTicket.price * this.curRates.EUR;
+          this.ticketPrice = this.renderTicket.price * (this.curRates.EUR / this.curRates.RUB);
           break;
         default:
           this.ticketPrice = this.renderTicket.price;

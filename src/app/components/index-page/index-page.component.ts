@@ -3,6 +3,7 @@ import { TicketsService } from '../../services/tickets.service';
 import { CurrencyService } from '../../services/currency.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index-page',
@@ -25,18 +26,21 @@ export class IndexPageComponent implements OnInit {
   }
 
   getTickets() {
-    this.ticketsService.getTickets().subscribe(
-      (responce: ITicketsResponce) => {
-        this.tickets = responce.tickets;
-      },
-      err => {
-        alert(err.message);
-        // TODO Add popup
-      },
-      () => {
-        console.log('Async fetching data from local server complete');
-      }
-    );
+    this.ticketsService
+      .getTickets()
+      .pipe(delay(3000))
+      .subscribe(
+        (responce: ITicketsResponce) => {
+          this.tickets = responce.tickets;
+        },
+        err => {
+          alert(err.message);
+          // TODO Add popup
+        },
+        () => {
+          console.log('Async fetching data from local server complete');
+        }
+      );
   }
 
   getExchangeRates() {
