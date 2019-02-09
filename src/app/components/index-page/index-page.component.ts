@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketsService } from '../../services/tickets.service';
 import { CurrencyService } from '../../services/currency.service';
+import { FilterService } from '../../services/filter.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
 import { delay } from 'rxjs/operators';
@@ -15,11 +16,14 @@ export class IndexPageComponent implements OnInit {
   curRates: ICurrencyRates;
   currency: string;
 
-  constructor(private ticketsService: TicketsService, private currencyService: CurrencyService) {}
+  constructor(
+    private ticketsService: TicketsService,
+    private currencyService: CurrencyService,
+    private filterService: FilterService
+  ) {}
 
   ngOnInit() {
-    this.getTickets();
-    this.currencyService.currentCurrencyType.subscribe(cur => {
+    this.filterService.currentCurrencyType.subscribe(cur => {
       this.currency = cur;
     });
     this.getExchangeRates();
@@ -28,7 +32,7 @@ export class IndexPageComponent implements OnInit {
   getTickets() {
     this.ticketsService
       .getTickets()
-      .pipe(delay(3000))
+      .pipe(delay(0))
       .subscribe(
         (responce: ITicketsResponce) => {
           this.tickets = responce.tickets;
@@ -47,7 +51,7 @@ export class IndexPageComponent implements OnInit {
     this.currencyService.getExchangeRates().subscribe(
       (responce: ICurrency) => {
         this.curRates = responce.rates;
-        console.log(this.curRates);
+        this.curRates && this.getTickets();
       },
       err => {
         alert(err.message);

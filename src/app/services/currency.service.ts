@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CurrencyService {
-  private currencyType = new BehaviorSubject('rub');
-  currentCurrencyType = this.currencyType.asObservable();
-
   constructor(private http: HttpClient) {}
 
   getExchangeRatesUrl: string =
@@ -20,9 +17,5 @@ export class CurrencyService {
         return throwError(err);
       })
     );
-  }
-
-  changeCurrencyType(cur: string) {
-    this.currencyType.next(cur);
   }
 }

@@ -22,6 +22,7 @@ import { FooterComponent } from './components/shared/footer';
 
 import { TicketsService } from './services/tickets.service';
 import { CurrencyService } from './services/currency.service';
+import { FilterService } from './services/filter.service';
 
 registerLocaleData(localeRu, localeEn);
 
@@ -41,7 +42,7 @@ registerLocaleData(localeRu, localeEn);
   // For global language settings
   // providers: [TicketsService, { provide: LOCALE_ID, useValue: 'ru-RU' }],
 
-  providers: [TicketsService, CurrencyService],
+  providers: [TicketsService, CurrencyService, FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
