@@ -12,8 +12,9 @@
       </label>
     </form> -->
     <form [formGroup]="form" (submit)="submit(form.value)">
-      <div *ngFor="let skill of skills.controls; let i=index">
-       <input type="checkbox" [formControl]="skill"/> {{user.skills[i].name}}
+      <div *ngFor="let skill of skillsRender.controls; let i=index">
+       <input type="checkbox" [formControl]="skill"/>
+       {{user.skills[i].name}}
       </div>
       <button type="submit">Submit</button>
      </form>

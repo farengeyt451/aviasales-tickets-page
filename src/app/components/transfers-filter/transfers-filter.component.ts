@@ -19,7 +19,7 @@ export class TransfersFilterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      skills: this.buildSkills()
+      stopsCount: this.buildSkills()
     });
   }
 
@@ -27,22 +27,24 @@ export class TransfersFilterComponent implements OnInit {
     console.log(this.stops);
   }
 
-  get skills() {
-    return this.form.get('skills');
+  // Геттер для рендера списка опций в шаблоне
+  get skillsRender() {
+    return this.form.get('stopsCount');
   }
 
+  // Возвращаем массив из FormControl
   buildSkills() {
     const arr = this.user.skills.map(skill => {
       return this.fb.control(skill.selected);
     });
     console.log(arr);
-
     return this.fb.array(arr);
   }
 
   submit(form) {
+    console.log(form);
     const formValue = Object.assign({}, form, {
-      skills: form.skills.map((selected, i) => {
+      stopsCount: form.stopsCount.map((selected, i) => {
         return {
           id: this.user.skills[i].id,
           selected,
@@ -50,6 +52,5 @@ export class TransfersFilterComponent implements OnInit {
         };
       })
     });
-    console.log(formValue);
   }
 }
