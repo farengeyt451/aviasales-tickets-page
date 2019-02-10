@@ -19,12 +19,6 @@ export class TransfersFilterComponent implements OnInit {
     this.getStopsCount();
   }
 
-  initForm() {
-    this.stopsForm = this.fb.group({
-      stopsCount: this.buildStops()
-    });
-  }
-
   getStopsCount() {
     this.filterService
       .getStopsCount()
@@ -37,10 +31,17 @@ export class TransfersFilterComponent implements OnInit {
           alert(err.message);
         },
         () => {
-          console.log('Async fetching stops data complete');
+          console.log('Async fetching stops complete');
           this.initForm();
         }
       );
+  }
+
+  // Func for async stopsForm init
+  initForm() {
+    this.stopsForm = this.fb.group({
+      stopsCount: this.buildStops()
+    });
   }
 
   // Getter for rendering a list of options in a template
@@ -56,7 +57,7 @@ export class TransfersFilterComponent implements OnInit {
     return this.fb.array(arr);
   }
 
-  formatData(data) {
+  formatData(data: Array<boolean>) {
     return data
       .filter(el => el === true)
       .map((el, i) => {
@@ -73,5 +74,12 @@ export class TransfersFilterComponent implements OnInit {
       stopsCount: this.formatData(value.stopsCount)
     });
     console.log(formValue);
+  }
+
+  checkOne(data, index) {
+    // TODO
+    // Add logic to be one checkbox is checked
+    // console.log(data, index);
+    // console.log(data.stopsCount[index]);
   }
 }

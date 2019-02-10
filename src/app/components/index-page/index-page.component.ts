@@ -40,10 +40,9 @@ export class IndexPageComponent implements OnInit {
         },
         err => {
           alert(err.message);
-          // TODO Add popup
         },
         () => {
-          console.log('Async fetching data from local server complete');
+          console.log('Async fetching tickets complete');
         }
       );
   }
@@ -55,10 +54,9 @@ export class IndexPageComponent implements OnInit {
       },
       err => {
         alert(err.message);
-        // TODO Add popup
       },
       () => {
-        console.log('Async fetching data from fixer.io server complete');
+        console.log('Async fetching exchange rates complete');
       }
     );
   }
