@@ -11,14 +11,17 @@
         <button class="transfers-filter__only">Только</button>
       </label>
     </form> -->
-    <form [formGroup]="form" (submit)="submit(form.value)">
-      <div *ngFor="let skill of skillsRender.controls; let i=index">
-       <input type="checkbox" [formControl]="skill"/>
-       {{user.skills[i].name}}
-      </div>
-      <button type="submit">Submit</button>
-     </form>
-    view raw
+
+
+    <form [formGroup]="form">
+      <label *ngFor="let stop of stopsRender.controls; let i=index" class="transfers-filter__option">
+        <input class="transfers-filter__chose" type="checkbox" [formControl]="stop">
+        <span class="transfers-filter__text" (click)="submit(form.value)">{{ stops[i].option }}</span>
+        <button class="transfers-filter__only">Только</button>
+      </label>
+      <!-- <button type="submit">Submit</button> -->
+    </form>
+
 
   </div>
 </div>

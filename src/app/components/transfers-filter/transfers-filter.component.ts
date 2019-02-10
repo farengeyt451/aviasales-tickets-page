@@ -23,34 +23,31 @@ export class TransfersFilterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.stops);
-  }
+  ngOnInit() {}
 
   // Геттер для рендера списка опций в шаблоне
-  get skillsRender() {
+  get stopsRender() {
     return this.form.get('stopsCount');
   }
 
   // Возвращаем массив из FormControl
   buildSkills() {
-    const arr = this.user.skills.map(skill => {
-      return this.fb.control(skill.selected);
+    const arr = this.stops.map(stop => {
+      return this.fb.control(stop.selected);
     });
-    console.log(arr);
     return this.fb.array(arr);
   }
 
   submit(form) {
+    // const formValue = Object.assign({}, form, {
+    //   stopsCount: form.stopsCount.map((selected, i) => {
+    //     return {
+    //       id: this.stops[i].id,
+    //       stopCount: this.stops[i].stopCount,
+    //       selected
+    //     };
+    //   })
+    // });
     console.log(form);
-    const formValue = Object.assign({}, form, {
-      stopsCount: form.stopsCount.map((selected, i) => {
-        return {
-          id: this.user.skills[i].id,
-          selected,
-          name: this.user.skills[i].name
-        };
-      })
-    });
   }
 }

@@ -37,7 +37,6 @@ export class IndexPageComponent implements OnInit {
       .subscribe(
         (responce: ITicketsResponce) => {
           this.tickets = responce.tickets;
-          console.log('this.tickets', this.tickets);
         },
         err => {
           alert(err.message);
