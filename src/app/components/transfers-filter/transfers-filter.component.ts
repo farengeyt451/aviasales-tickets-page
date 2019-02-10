@@ -9,17 +9,13 @@ import { IStops } from '../../interfaces/stops.interface';
   styleUrls: ['./transfers-filter.component.sass']
 })
 export class TransfersFilterComponent implements OnInit {
-  user = {
-    skills: [{ name: 'JS', selected: false, id: 1 }, { name: 'CSS', selected: true, id: 2 }]
-  };
-
-  form: FormGroup;
+  stopsForm: FormGroup;
 
   public stops: Array<IStops> = STOPS;
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      stopsCount: this.buildSkills()
+    this.stopsForm = this.fb.group({
+      stopsCount: this.buildStops()
     });
   }
 
@@ -27,27 +23,27 @@ export class TransfersFilterComponent implements OnInit {
 
   // Геттер для рендера списка опций в шаблоне
   get stopsRender() {
-    return this.form.get('stopsCount');
+    return this.stopsForm.get('stopsCount');
   }
 
   // Возвращаем массив из FormControl
-  buildSkills() {
+  buildStops() {
     const arr = this.stops.map(stop => {
       return this.fb.control(stop.selected);
     });
     return this.fb.array(arr);
   }
 
-  submit(form) {
-    // const formValue = Object.assign({}, form, {
-    //   stopsCount: form.stopsCount.map((selected, i) => {
-    //     return {
-    //       id: this.stops[i].id,
-    //       stopCount: this.stops[i].stopCount,
-    //       selected
-    //     };
-    //   })
-    // });
-    console.log(form);
+  submit(value) {
+    const formValue = Object.assign({}, value, {
+      stopsCount: value.stopsCount.map((el, i) => {
+        return {
+          id: this.stops[i].id,
+          stopCount: this.stops[i].stopCount,
+          selected: el
+        };
+      })
+    });
+    console.log(formValue);
   }
 }
