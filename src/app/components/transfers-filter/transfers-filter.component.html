@@ -4,7 +4,7 @@
 
   <div class="transfers-filter__options">
 
-    <form [formGroup]="stopsForm">
+    <form *ngIf="stopsForm" [formGroup]="stopsForm" >
       <label *ngFor="let stop of stopsRender.controls; let i=index" class="transfers-filter__option">
         <input class="transfers-filter__chose" type="checkbox" [formControl]="stop" (change)="submit(stopsForm.value)">
         <span class="transfers-filter__text" >{{ stops[i].option }}</span>

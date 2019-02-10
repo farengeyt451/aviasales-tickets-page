@@ -33,7 +33,7 @@ export class IndexPageComponent implements OnInit {
   getTickets() {
     this.ticketsService
       .getTickets()
-      .pipe(delay(0))
+      .pipe(delay(200))
       .subscribe(
         (responce: ITicketsResponce) => {
           this.tickets = responce.tickets;

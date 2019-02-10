@@ -1,26 +1,47 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { STOPS } from '../../fixtures/stops.fixture';
-import { IStops } from '../../interfaces/stops.interface';
+import { FilterService } from '../../services/filter.service';
+import { IStopsResponce, IStops } from '../../interfaces/stops.interface';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transfers-filter',
   templateUrl: './transfers-filter.component.html',
-  styleUrls: ['./transfers-filter.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./transfers-filter.component.sass']
 })
 export class TransfersFilterComponent implements OnInit {
   stopsForm: FormGroup;
+  stops: Array<IStops>;
 
-  public stops: Array<IStops> = STOPS;
+  constructor(private fb: FormBuilder, private filterService: FilterService) {}
 
-  constructor(private fb: FormBuilder) {
+  ngOnInit() {
+    this.getStopsCount();
+  }
+
+  initForm() {
     this.stopsForm = this.fb.group({
       stopsCount: this.buildStops()
     });
   }
 
-  ngOnInit() {}
+  getStopsCount() {
+    this.filterService
+      .getStopsCount()
+      .pipe(delay(200))
+      .subscribe(
+        (responce: IStopsResponce) => {
+          this.stops = responce.stops;
+        },
+        err => {
+          alert(err.message);
+        },
+        () => {
+          console.log('Async fetching stops data complete');
+          this.initForm();
+        }
+      );
+  }
 
   // Getter for rendering a list of options in a template
   get stopsRender() {

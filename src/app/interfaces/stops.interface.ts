@@ -1,3 +1,7 @@
+export interface IStopsResponce {
+  stops: Array<IStops>;
+}
+
 export interface IStops {
   id: number;
   option: string;
