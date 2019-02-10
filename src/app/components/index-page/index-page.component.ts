@@ -23,6 +23,7 @@ export class IndexPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getTickets();
     this.filterService.currentCurrencyType.subscribe(cur => {
       this.currency = cur;
     });
@@ -36,6 +37,7 @@ export class IndexPageComponent implements OnInit {
       .subscribe(
         (responce: ITicketsResponce) => {
           this.tickets = responce.tickets;
+          console.log('this.tickets', this.tickets);
         },
         err => {
           alert(err.message);
@@ -51,7 +53,6 @@ export class IndexPageComponent implements OnInit {
     this.currencyService.getExchangeRates().subscribe(
       (responce: ICurrency) => {
         this.curRates = responce.rates;
-        this.curRates && this.getTickets();
       },
       err => {
         alert(err.message);

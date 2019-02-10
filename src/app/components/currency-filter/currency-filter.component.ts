@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CurrencyService } from '../../services/currency.service';
 import { FilterService } from '../../services/filter.service';
 
-import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
+import { ICurrencyRates } from '../../interfaces/currency.interface';
 
 @Component({
   selector: 'app-currency-filter',
@@ -14,11 +13,7 @@ export class CurrencyFilterComponent implements OnInit {
   curRates: ICurrencyRates;
   currencyForm: FormGroup;
 
-  constructor(
-    private currencyService: CurrencyService,
-    private fb: FormBuilder,
-    private filterService: FilterService
-  ) {
+  constructor(private fb: FormBuilder, private filterService: FilterService) {
     this.currencyForm = this.fb.group({
       currencyType: ['rub']
     });

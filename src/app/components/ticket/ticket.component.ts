@@ -13,13 +13,14 @@ export class TicketComponent implements OnInit {
   @Input() curRates: ICurrencyRates;
 
   ticketPrice: number;
+  stops: number = 0;
 
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getTicketPrice(changes.currencyType.currentValue);
+    changes.currencyType && this.getTicketPrice(changes.currencyType.currentValue);
   }
 
   setDate(date: string): Date {
