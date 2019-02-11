@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
-import { IStopsResponce, IStops } from '../../interfaces/stops.interface';
+import { IStopsResponce, IStops, IStopFromForm } from '../../interfaces/stops.interface';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -31,7 +31,7 @@ export class TransfersFilterComponent implements OnInit {
           alert(err.message);
         },
         () => {
-          console.log('Async fetching stops complete');
+          console.log('Async fetching stops count complete');
           this.initForm();
         }
       );
@@ -57,29 +57,33 @@ export class TransfersFilterComponent implements OnInit {
     return this.fb.array(arr);
   }
 
+  // Formatting data for submitting
   formatData(data: Array<boolean>) {
-    return data
-      .filter(el => el === true)
-      .map((el, i) => {
-        return {
-          id: this.stops[i].id,
-          stopCount: this.stops[i].stopCount,
-          selected: el
-        };
-      });
+    return data.map((el, i) => {
+      return {
+        id: this.stops[i].id,
+        stopCount: this.stops[i].stopCount,
+        selected: el
+      };
+    });
   }
 
-  submit(value) {
+  submit(value: IStopFromForm) {
     const formValue = Object.assign({}, value, {
       stopsCount: this.formatData(value.stopsCount)
     });
     console.log(formValue);
   }
 
-  checkOne(data, index) {
-    // TODO
-    // Add logic to be one checkbox is checked
-    // console.log(data, index);
-    // console.log(data.stopsCount[index]);
+  isShowingBtn(index: number) {
+    return (this.stopsForm.controls.stopsCount as FormArray).controls[index].value;
+  }
+
+  // Func to uncheck all checkboxes
+  // Cuz checkboxes have (change) event on template this.submit will be called automatically
+  checkOne() {
+    (this.stopsForm.controls.stopsCount as FormArray).controls.forEach(el => {
+      el.setValue(false);
+    });
   }
 }

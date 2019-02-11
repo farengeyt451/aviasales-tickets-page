@@ -8,3 +8,7 @@ export interface IStops {
   stopCount: number | null;
   selected: boolean;
 }
+
+export interface IStopFromForm {
+  stopsCount: Array<boolean>;
+}
