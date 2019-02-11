@@ -5,6 +5,7 @@ import { FilterService } from '../../services/filter.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
 import { delay } from 'rxjs/operators';
+import { IStopFromForm } from 'src/app/interfaces/stops.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -15,6 +16,7 @@ export class IndexPageComponent implements OnInit {
   tickets: Array<ITickets>;
   curRates: ICurrencyRates;
   currency: string;
+  stopsCount: IStopFromForm;
 
   constructor(
     private ticketsService: TicketsService,
@@ -24,9 +26,22 @@ export class IndexPageComponent implements OnInit {
 
   ngOnInit() {
     this.getTickets();
-    this.filterService.currentCurrencyType.subscribe(cur => {
-      this.currency = cur;
-    });
+    this.filterService.currentCurrencyType.subscribe(
+      data => {
+        this.currency = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.filterService.currentStopsCount.subscribe(
+      data => {
+        this.stopsCount = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
     this.getExchangeRates();
   }
 

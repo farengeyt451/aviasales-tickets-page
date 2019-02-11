@@ -28,5 +28,7 @@ export class CurrencyFilterComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.filterService.changeCurrencyType('rub');
+  }
 }

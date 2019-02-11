@@ -42,6 +42,7 @@ export class TransfersFilterComponent implements OnInit {
     this.stopsForm = this.fb.group({
       stopsCount: this.buildStops()
     });
+    this.submit(this.stopsForm.value);
   }
 
   // Getter for rendering a list of options in a template
@@ -74,7 +75,7 @@ export class TransfersFilterComponent implements OnInit {
     const formValue = Object.assign({}, value, {
       stopsCount: this.formatData(value.stopsCount)
     });
-    console.log(formValue);
+    this.filterService.changeStopsCount(formValue);
   }
 
   isShowingBtn(index: number) {
