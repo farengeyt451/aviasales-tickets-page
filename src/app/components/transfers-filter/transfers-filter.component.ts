@@ -59,13 +59,15 @@ export class TransfersFilterComponent implements OnInit {
 
   // Formatting data for submitting
   formatData(data: Array<boolean>) {
-    return data.map((el, i) => {
-      return {
-        id: this.stops[i].id,
-        stopCount: this.stops[i].stopCount,
-        selected: el
-      };
-    });
+    return data
+      .map((el, i) => {
+        return {
+          id: this.stops[i].id,
+          stopCount: this.stops[i].stopCount,
+          selected: el
+        };
+      })
+      .filter(el => el.selected === true);
   }
 
   submit(value: IStopFromForm) {
