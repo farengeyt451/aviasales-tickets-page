@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
-import { IStopsResponce, IStops, IStopFromForm } from '../../interfaces/stops.interface';
+import { IStopsResponce, IStops } from '../../interfaces/stops.interface';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -71,7 +71,7 @@ export class TransfersFilterComponent implements OnInit {
       .filter(el => el.selected === true);
   }
 
-  submit(value: IStopFromForm) {
+  submit(value) {
     const formValue = Object.assign({}, value, {
       stopsCount: this.formatData(value.stopsCount)
     });

@@ -3,7 +3,7 @@
     {
       "id": 0,
       "option": "Все",
-      "stopCount": null,
+      "stopCount": -1,
       "selected": true
     },
     {

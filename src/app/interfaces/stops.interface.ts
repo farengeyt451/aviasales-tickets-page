@@ -12,3 +12,7 @@ export interface IStops {
 export interface IStopFromForm {
   stopsCount: Array<boolean>;
 }
+
+export interface IFormSubmit {
+  stopsCount: Array<IStops>;
+}

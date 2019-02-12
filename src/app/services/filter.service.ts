@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { IStopFromForm } from '../interfaces/stops.interface';
+import { IFormSubmit } from '../interfaces/stops.interface';
 
 @Injectable()
 export class FilterService {
@@ -11,14 +11,14 @@ export class FilterService {
   private currencyType = new Subject<string>();
   currentCurrencyType = this.currencyType.asObservable();
 
-  private stopsCount = new Subject<IStopFromForm>();
+  private stopsCount = new Subject<IFormSubmit>();
   currentStopsCount = this.stopsCount.asObservable();
 
   changeCurrencyType(cur: string) {
     this.currencyType.next(cur);
   }
 
-  changeStopsCount(stopsCount: IStopFromForm) {
+  changeStopsCount(stopsCount: IFormSubmit) {
     this.stopsCount.next(stopsCount);
   }
 
