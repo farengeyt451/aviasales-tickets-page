@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ITickets } from '../../interfaces/tickets.interface';
 import { ICurrencyRates } from '../../interfaces/currency.interface';
+import plural from 'plural-ru';
 
 @Component({
   selector: 'app-ticket',
@@ -15,10 +16,18 @@ export class TicketComponent implements OnInit {
   ticketPrice: number;
   stops: number = 0;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+  found(cn) {
+    return plural.verb(
+      cn,
+      'найден',
+      'найдено',
+      'найдено'
+    );
+  }
   ngOnChanges(changes: SimpleChanges) {
     changes.currencyType && this.getTicketPrice(changes.currencyType.currentValue);
   }
