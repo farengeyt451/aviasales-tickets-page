@@ -18,11 +18,9 @@ export class TicketComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.curRates);
-  }
+  ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     changes.currencyType && this.getTicketPrice(changes.currencyType.currentValue);
   }
 

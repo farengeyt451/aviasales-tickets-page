@@ -67,7 +67,6 @@ export class IndexPageComponent implements OnInit {
   getExchangeRates() {
     this.currencyService.getExchangeRates().subscribe(
       (responce: Currency) => {
-        console.log('responce', responce);
         this.curRates = responce.rates;
       },
       err => {
