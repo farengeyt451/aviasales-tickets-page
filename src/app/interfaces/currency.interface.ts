@@ -8,6 +8,6 @@ export interface Currency {
 
 export interface CurrencyRates {
   USD: number;
-  EUR: number;
+  EUR?: number;
   RUB: number;
 }

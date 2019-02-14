@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { ITickets } from '../../interfaces/tickets.interface';
+import { Tickets } from '../../interfaces/tickets.interface';
 import { CurrencyRates } from '../../interfaces/currency.interface';
 import pluralize from 'plural-ru';
 
@@ -9,7 +9,7 @@ import pluralize from 'plural-ru';
   styleUrls: ['./ticket.component.sass']
 })
 export class TicketComponent implements OnInit {
-  @Input() renderTicket: ITickets;
+  @Input() renderTicket: Tickets;
   @Input() currencyType: string;
   @Input() curRates: CurrencyRates;
 
@@ -18,7 +18,9 @@ export class TicketComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.curRates);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     changes.currencyType && this.getTicketPrice(changes.currencyType.currentValue);
@@ -32,19 +34,19 @@ export class TicketComponent implements OnInit {
     return new Date(year, month, day);
   }
 
-  convertPlural(count: number) {
+  convertPlural(count: number): string {
     return pluralize.noun(count, 'пересадка', 'пересадки', 'пересадок');
   }
 
+  // Base 1EUR
   getTicketPrice(type: string): void {
     if (type) {
       switch (type) {
         case 'usd':
-          this.ticketPrice =
-            this.renderTicket.price * (this.curRates.EUR / this.curRates.RUB) * this.curRates.USD;
+          this.ticketPrice = this.renderTicket.price * (1 / this.curRates.RUB) * this.curRates.USD;
           break;
         case 'eur':
-          this.ticketPrice = this.renderTicket.price * (this.curRates.EUR / this.curRates.RUB);
+          this.ticketPrice = this.renderTicket.price * (1 / this.curRates.RUB);
           break;
         default:
           this.ticketPrice = this.renderTicket.price;

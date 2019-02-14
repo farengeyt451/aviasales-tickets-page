@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TicketsService } from '../../services/tickets.service';
 import { CurrencyService } from '../../services/currency.service';
 import { FilterService } from '../../services/filter.service';
-import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
+import { TicketsResponce, Tickets } from '../../interfaces/tickets.interface';
 import { Currency, CurrencyRates } from '../../interfaces/currency.interface';
 import { delay } from 'rxjs/operators';
 import { FormSubmit, Stops } from 'src/app/interfaces/stops.interface';
@@ -13,10 +13,10 @@ import { FormSubmit, Stops } from 'src/app/interfaces/stops.interface';
   styleUrls: ['./index-page.component.sass']
 })
 export class IndexPageComponent implements OnInit {
-  tickets: Array<ITickets>;
+  tickets: Array<Tickets>;
   curRates: CurrencyRates;
   currency: string;
-  stopsCount: Array<Stops>;
+  stopsCount: Array<number>;
 
   constructor(
     private ticketsService: TicketsService,
@@ -36,8 +36,9 @@ export class IndexPageComponent implements OnInit {
     );
     this.filterService.currentStopsCount.subscribe(
       (data: FormSubmit) => {
-        this.stopsCount = data.stopsCount;
+        this.stopsCount = data.stopsCount.map(el => el.stopCount);
         console.log(this.stopsCount);
+        this.filterTickets(this.tickets, this.stopsCount);
       },
       error => {
         console.log(error);
@@ -51,7 +52,7 @@ export class IndexPageComponent implements OnInit {
       .getTickets()
       .pipe(delay(200))
       .subscribe(
-        (responce: ITicketsResponce) => {
+        (responce: TicketsResponce) => {
           this.tickets = responce.tickets;
         },
         err => {
@@ -66,6 +67,7 @@ export class IndexPageComponent implements OnInit {
   getExchangeRates() {
     this.currencyService.getExchangeRates().subscribe(
       (responce: Currency) => {
+        console.log('responce', responce);
         this.curRates = responce.rates;
       },
       err => {
@@ -75,5 +77,11 @@ export class IndexPageComponent implements OnInit {
         console.log('Async fetching exchange rates complete');
       }
     );
+  }
+
+  filterTickets(tickets: Array<Tickets>, stopsCount: Array<number>) {
+    if (stopsCount.some(el => el < 0)) {
+      return;
+    }
   }
 }

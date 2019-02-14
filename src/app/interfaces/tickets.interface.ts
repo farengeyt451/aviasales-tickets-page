@@ -1,8 +1,8 @@
-export interface ITicketsResponce {
-  tickets: Array<ITickets>;
+export interface TicketsResponce {
+  tickets: Array<Tickets>;
 }
 
-export interface ITickets {
+export interface Tickets {
   arrival_date: string;
   arrival_time: string;
   carrier: string;
