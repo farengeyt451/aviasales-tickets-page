@@ -4,8 +4,8 @@ export interface StopsResponce {
 
 export interface Stops {
   id: number;
-  option: string;
-  stopCount: number | null;
+  stopCount: number;
+  option?: string;
   selected: boolean;
 }
 

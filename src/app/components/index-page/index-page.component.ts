@@ -5,7 +5,7 @@ import { FilterService } from '../../services/filter.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
 import { Currency, CurrencyRates } from '../../interfaces/currency.interface';
 import { delay } from 'rxjs/operators';
-import { FormSubmit } from 'src/app/interfaces/stops.interface';
+import { FormSubmit, Stops } from 'src/app/interfaces/stops.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -16,7 +16,7 @@ export class IndexPageComponent implements OnInit {
   tickets: Array<ITickets>;
   curRates: CurrencyRates;
   currency: string;
-  stopsCount;
+  stopsCount: Array<Stops>;
 
   constructor(
     private ticketsService: TicketsService,
@@ -35,8 +35,9 @@ export class IndexPageComponent implements OnInit {
       }
     );
     this.filterService.currentStopsCount.subscribe(
-      (data: any) => {
-        console.log(data.stopsCount);
+      (data: FormSubmit) => {
+        this.stopsCount = data.stopsCount;
+        console.log(this.stopsCount);
       },
       error => {
         console.log(error);
