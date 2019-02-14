@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
 
-import { ICurrencyRates } from '../../interfaces/currency.interface';
+import { CurrencyRates } from '../../interfaces/currency.interface';
 
 @Component({
   selector: 'app-currency-filter',
@@ -10,7 +10,7 @@ import { ICurrencyRates } from '../../interfaces/currency.interface';
   styleUrls: ['./currency-filter.component.sass']
 })
 export class CurrencyFilterComponent implements OnInit {
-  curRates: ICurrencyRates;
+  curRates: CurrencyRates;
   currencyForm: FormGroup;
 
   constructor(private fb: FormBuilder, private filterService: FilterService) {

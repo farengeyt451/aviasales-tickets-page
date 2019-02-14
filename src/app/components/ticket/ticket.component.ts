@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ITickets } from '../../interfaces/tickets.interface';
-import { ICurrencyRates } from '../../interfaces/currency.interface';
+import { CurrencyRates } from '../../interfaces/currency.interface';
 import pluralize from 'plural-ru';
 
 @Component({
@@ -11,14 +11,14 @@ import pluralize from 'plural-ru';
 export class TicketComponent implements OnInit {
   @Input() renderTicket: ITickets;
   @Input() currencyType: string;
-  @Input() curRates: ICurrencyRates;
+  @Input() curRates: CurrencyRates;
 
   ticketPrice: number;
   stops: number = 0;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     changes.currencyType && this.getTicketPrice(changes.currencyType.currentValue);
@@ -33,7 +33,7 @@ export class TicketComponent implements OnInit {
   }
 
   convertPlural(count: number) {
-    return pluralize.noun(count, 'пересадка', 'пересадки', 'пересадок')
+    return pluralize.noun(count, 'пересадка', 'пересадки', 'пересадок');
   }
 
   getTicketPrice(type: string): void {

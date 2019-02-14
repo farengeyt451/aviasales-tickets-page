@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
-import { IStopsResponce, IStops } from '../../interfaces/stops.interface';
+import { StopsResponce, Stops } from '../../interfaces/stops.interface';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ import { delay } from 'rxjs/operators';
 })
 export class TransfersFilterComponent implements OnInit {
   stopsForm: FormGroup;
-  stops: Array<IStops>;
+  stops: Array<Stops>;
 
   constructor(private fb: FormBuilder, private filterService: FilterService) {}
 
@@ -24,7 +24,7 @@ export class TransfersFilterComponent implements OnInit {
       .getStopsCount()
       .pipe(delay(200))
       .subscribe(
-        (responce: IStopsResponce) => {
+        (responce: StopsResponce) => {
           this.stops = responce.stops;
         },
         err => {

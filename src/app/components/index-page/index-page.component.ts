@@ -3,9 +3,9 @@ import { TicketsService } from '../../services/tickets.service';
 import { CurrencyService } from '../../services/currency.service';
 import { FilterService } from '../../services/filter.service';
 import { ITicketsResponce, ITickets } from '../../interfaces/tickets.interface';
-import { ICurrency, ICurrencyRates } from '../../interfaces/currency.interface';
+import { Currency, CurrencyRates } from '../../interfaces/currency.interface';
 import { delay } from 'rxjs/operators';
-import { IFormSubmit } from 'src/app/interfaces/stops.interface';
+import { FormSubmit } from 'src/app/interfaces/stops.interface';
 
 @Component({
   selector: 'app-index-page',
@@ -14,7 +14,7 @@ import { IFormSubmit } from 'src/app/interfaces/stops.interface';
 })
 export class IndexPageComponent implements OnInit {
   tickets: Array<ITickets>;
-  curRates: ICurrencyRates;
+  curRates: CurrencyRates;
   currency: string;
   stopsCount;
 
@@ -64,7 +64,7 @@ export class IndexPageComponent implements OnInit {
 
   getExchangeRates() {
     this.currencyService.getExchangeRates().subscribe(
-      (responce: ICurrency) => {
+      (responce: Currency) => {
         this.curRates = responce.rates;
       },
       err => {

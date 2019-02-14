@@ -1,12 +1,12 @@
-export interface ICurrency {
+export interface Currency {
   base: string;
   date: string;
-  rates: ICurrencyRates;
+  rates: CurrencyRates;
   success: boolean;
   timestamp: number;
 }
 
-export interface ICurrencyRates {
+export interface CurrencyRates {
   USD: number;
   EUR: number;
   RUB: number;
