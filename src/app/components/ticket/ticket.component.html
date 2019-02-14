@@ -5,13 +5,13 @@
     <img class="ticket__logo" src="assets/images/ticket/turkish-airlines-logo.png">
     <button type="button" class="ticket__buy">Купить
       <span *ngIf="currencyType === 'rub'" class="ticket__price">
-        за {{ ticketPrice | currency : 'RUB': 'symbol': '1.0-0' :'ru-RU'}}
+        за {{ ticketPrice | currency : 'RUB': 'symbol': '1.0-0': 'ru-RU'}}
       </span>
       <span *ngIf="currencyType === 'usd'" class="ticket__price">
-        за {{ ticketPrice | currency : 'USD': 'symbol': '1.0-0' :'ru-RU'}}
+        за {{ ticketPrice | currency : 'USD': 'symbol': '1.0-0': 'ru-RU'}}
       </span>
       <span *ngIf="currencyType === 'eur'" class="ticket__price">
-        за {{ ticketPrice | currency : 'EUR': 'symbol': '1.0-0' :'ru-RU'}}
+        за {{ ticketPrice | currency : 'EUR': 'symbol': '1.0-0': 'ru-RU'}}
       </span>
     </button>
   </div>
@@ -20,7 +20,7 @@
     <div class="ticket__timing">
       <div class="ticket__time ticket__time-departure">{{ renderTicket.departure_time }}</div>
       <div class="ticket__transfer">{{ renderTicket.stops }}
-        {{ returnDeclension(renderTicket.stops) }}</div>
+        {{ convertPlural(renderTicket.stops) }}</div>
       <div class="ticket__time ticket__time-arrival">{{ renderTicket.arrival_time }}</div>
     </div>
 
@@ -40,5 +40,4 @@
     </div>
 
   </div>
-
 </div>
