@@ -30,7 +30,7 @@ export class FilterService {
   }
 
   getStopsCount() {
-    return this.http.get('/assets/data/filter.json').pipe(
+    return this.http.get('assets/data/filter.json').pipe(
       map(response => response),
       catchError(err => {
         return throwError(err);
