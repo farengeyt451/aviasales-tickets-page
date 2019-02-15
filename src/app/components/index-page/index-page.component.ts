@@ -27,6 +27,7 @@ export class IndexPageComponent implements OnInit {
 
   ngOnInit() {
     this.getTickets();
+
     this.filterService.currentCurrencyType.subscribe(
       data => {
         this.currency = data;
@@ -35,6 +36,7 @@ export class IndexPageComponent implements OnInit {
         console.log(error);
       }
     );
+
     this.filterService.currentStopsCount.subscribe(
       (data: FormSubmit) => {
         this.stopsCount = data.stopsCount.map(el => el.stopCount);
@@ -44,7 +46,17 @@ export class IndexPageComponent implements OnInit {
         console.log(error);
       }
     );
+
     this.getExchangeRates();
+
+    this.filterService.currentSortCondition.subscribe(
+      data => {
+        data && this.sortTickets(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getTickets(): void {
@@ -79,7 +91,7 @@ export class IndexPageComponent implements OnInit {
   }
 
   filterTickets(tickets: Array<Tickets>, stopsCount: Array<number>): Array<Tickets> {
-    if (stopsCount.some(el => el < 0)) {
+    if (stopsCount.some(el => el < 0) || stopsCount.length === 0) {
       return (this.filteredTickets = tickets);
     } else {
       this.filteredTickets = tickets.filter(el => {

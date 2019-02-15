@@ -1,0 +1,58 @@
+@import '~src/common/index'
+
+.filter-sorting
+
+.filter-sorting__caption
+  margin: 3px 0
+  font-size: 12px
+  font-weight: $font-semi-bold
+  color: $text
+  letter-spacing: 0.5px
+  text-transform: uppercase
+
+.filter-sorting__actoins
+
+.filter-sorting__options
+  display: flex
+  justify-content: center
+  margin-top: 15px
+
+.filter-sorting__option
+  flex-basis: 50%
+  flex-shrink: 0
+
+  &:first-child
+    .filter-sorting__signs
+      border-radius: 5px 0 0 5px
+
+  &:last-child
+    .filter-sorting__signs
+      border-radius: 0 5px 5px 0
+      border-left: none
+
+.filter-sorting__signs
+  display: block
+  padding: 12px 20px
+  border: 1px solid #d2d5d6
+  font-size: 12px
+  font-weight: $font-semi-bold
+  color: $primary
+  text-align: center
+  letter-spacing: 0.5px
+  text-transform: uppercase
+  transition: background-color 0.2s ease-in, border-color 0.2s ease-out
+
+  &:hover
+    border-color: $primary
+    cursor: pointer
+    background-color: $primary-light
+
+  &:focus
+    border: 1px solid $primary
+
+.filter-sorting__chose
+  +visually-hidden
+
+.filter-sorting__chose:checked + .filter-sorting__signs
+  color: #fff
+  background-color: $primary

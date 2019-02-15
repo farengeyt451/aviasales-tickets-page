@@ -1,0 +1,21 @@
+<div class="filter-sorting">
+
+  <h2 class="filter-sorting__caption">Сортировка пересадок по:</h2>
+
+  <div class="filter-sorting__options">
+
+    <label class="filter-sorting__option">
+      <input class="filter-sorting__chose" type="radio" name="sorting" value="up" (change)="sortTickets($event.target.value)">
+      <span class="filter-sorting__signs">Возрастанию</span>
+    </label>
+
+    <label class="filter-sorting__option">
+      <input class="filter-sorting__chose" type="radio" name="sorting" value="down" (change)="sortTickets($event.target.value)">
+      <span class="filter-sorting__signs">Убыванию</span>
+    </label>
+
+  </div>
+
+</div>
+
+

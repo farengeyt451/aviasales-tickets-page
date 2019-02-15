@@ -14,12 +14,19 @@ export class FilterService {
   private stopsCount = new Subject<FormSubmit>();
   currentStopsCount = this.stopsCount.asObservable();
 
+  private sortCondition = new Subject<string>();
+  currentSortCondition = this.sortCondition.asObservable();
+
   changeCurrencyType(cur: string) {
     this.currencyType.next(cur);
   }
 
   changeStopsCount(stopsCount: FormSubmit) {
     this.stopsCount.next(stopsCount);
+  }
+
+  changeSortCondition(condition: string) {
+    this.sortCondition.next(condition);
   }
 
   getStopsCount() {

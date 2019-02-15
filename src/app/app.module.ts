@@ -18,6 +18,7 @@ import { TicketComponent } from './components/ticket';
 import { FilterComponent } from './components/filter';
 import { CurrencyFilterComponent } from './components/currency-filter';
 import { TransfersFilterComponent } from './components/transfers-filter';
+import { SortFilterComponent } from './components/sort-filter';
 import { FooterComponent } from './components/shared/footer';
 
 import { TicketsService } from './services/tickets.service';
@@ -35,7 +36,8 @@ registerLocaleData(localeRu, localeEn);
     FilterComponent,
     FooterComponent,
     CurrencyFilterComponent,
-    TransfersFilterComponent
+    TransfersFilterComponent,
+    SortFilterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
 
