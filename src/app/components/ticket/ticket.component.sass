@@ -3,12 +3,15 @@
 .ticket
   display: flex
   justify-content: space-between
-  max-width: 566px
+  width: 100%
   min-height: 160px
   margin-bottom: 20px
   background-color: #fff
   box-shadow: 0 1px 4px rgba(91, 137, 164, 0.25)
   border-radius: 5px
+
+  +media($mobile-md)
+    flex-direction: column
 
 .ticket__airlines
   display: flex
@@ -19,8 +22,29 @@
   padding: 20px
   border-right: 1px solid #eceff1
 
+  +media($mobile-md)
+    flex-basis: 120px
+    flex-direction: row
+    justify-content: space-between
+    order: 1
+    align-items: center
+    border-top: 1px solid #eceff1
+    border-right: none
+    padding: 0px 60px
+    margin-top: 20px
+
+  +media(500px)
+    flex-direction: column
+    padding-top: 25px
+    padding-bottom: 25px
+
+.ticket__logo-holder
+  max-width: 120px
+
 .ticket__logo
   display: block
+  width: 100%
+  height: auto
 
 .ticket__buy
   min-width: 165px
@@ -45,6 +69,9 @@
   &:active
     background-color: darken($secondary-light, 5%)
 
+  +media($mobile-md)
+    margin-top: 0
+
 .ticket__price
   display: block
   font-weight: $font-regular
@@ -55,16 +82,24 @@
   flex-grow: 1
   padding: 23px 25px
 
+  +media($mobile-md)
+    padding: 25px 60px 0 60px
+
 .ticket__timing
   display: flex
   justify-content: space-between
 
+  +media($mobile-sm)
+    flex-direction: column
+    align-items: center
+
 .ticket__time
+  flex-basis: 30%
   font-size: 32px
   color: $text
 
 .ticket__transfer
-  flex-basis: 110px
+  flex-basis: 35%
   margin-top: 5px
   margin-left: -8px
   color: $text-light
@@ -81,14 +116,34 @@
     background-image: url('/assets/images/ticket/airplane.svg')
     background-repeat: no-repeat
     background-size: contain
+    background-position: center
+
+.ticket__transfer-count
+  display: inline-block
+  height: 10px
+  width: 10px
+  padding: 5px
+  font-weight: $font-bold
+  color: #fff
+  background-color: #2196f3
+  border-radius: 100%
+  text-align: center
 
 .ticket__time-arrival
+  text-align: right
 
 .ticket__place
   display: flex
   justify-content: space-between
   margin-top: 6px
   font-size: 12px
+
+  +media($mobile-sm)
+    flex-direction: column
+    align-items: center
+    margin-top: 15px
+    font-size: 14px
+    text-align: center
 
 .ticket__city
   color: $text
@@ -98,9 +153,14 @@
   margin-top: 5px
   color: $text-light
 
-.ticket__date--right
+.ticket__date--align
   text-align: right
+
+  +media($mobile-sm)
+    text-align: center
 
 .ticket__place-departure
 
 .ticket__place-arrival
+  +media($mobile-sm)
+    margin-top: 15px

@@ -10,15 +10,49 @@
   display: flex
   justify-content: space-between
   margin-top: 30px
-  padding: 0px 85px
+  padding: 0 70px
+  box-sizing: border-box
+
+  +media($laptop-sm)
+    padding: 0 60px
+
+  +media($tablet)
+    flex-direction: column
+    padding: 0 110px
+
+  +media($mobile-lg)
+    padding: 0 25px
 
 .tickets__filter
-  flex-grow: 1
+  width: 100%
+  max-height: 450px
   margin-right: 20px
+  background-color: #fff
+  box-shadow: 0 1px 4px rgba(91, 137, 164, 0.25)
+  border-radius: 5px
+  box-sizing: border-box
+
+  +media($tablet)
+    max-height: none
+    padding: 25px 85px
+    margin-right: 0
+
+  +media($tablet)
+    padding: 25px 65px
+
+  +media($mobile-sm)
+    padding: 25px 20px
+
+  +media($mobile-xs)
+    padding: 15px 10px
 
 .tickets__render
   flex-shrink: 0
-  flex-basis: 70%
+  flex-basis: 65%
+
+  +media($tablet)
+    flex-basis: 100%
+    margin-top: 20px
 
 .tickets__loader
   position: relative

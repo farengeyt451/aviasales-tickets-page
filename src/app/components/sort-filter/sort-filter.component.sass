@@ -17,6 +17,9 @@
   justify-content: center
   margin-top: 15px
 
+  +media($mobile-sm)
+    flex-direction: column
+
 .filter-sorting__option
   flex-basis: 50%
   flex-shrink: 0
@@ -25,12 +28,24 @@
     .filter-sorting__signs
       border-radius: 5px 0 0 5px
 
+      &:hover
+        z-index: 2
+
+      +media($mobile-sm)
+        border-radius: 5px 5px 0 0
+
   &:last-child
     .filter-sorting__signs
       border-radius: 0 5px 5px 0
-      border-left: none
+      margin-left: -1px
+
+      +media($mobile-sm)
+        margin-top: -1px
+        margin-left: 0
+        border-radius:  0 0 5px 5px
 
 .filter-sorting__signs
+  position: relative
   display: block
   padding: 12px 20px
   border: 1px solid #d2d5d6
@@ -56,3 +71,4 @@
 .filter-sorting__chose:checked + .filter-sorting__signs
   color: #fff
   background-color: $primary
+  border-color: $primary
