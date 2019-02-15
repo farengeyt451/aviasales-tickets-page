@@ -13,7 +13,9 @@
 
           <ng-container *ngIf="tickets">
 
-            <app-ticket *ngFor="let ticket of tickets" [renderTicket]="ticket" [currencyType]="currency" [curRates]="curRates"></app-ticket>
+            <app-ticket *ngFor="let ticket of filteredTickets" [renderTicket]="ticket" [currencyType]="currency" [curRates]="curRates">
+            </app-ticket>
+
           </ng-container>
 
           <div class="tickets__loader" *ngIf="!tickets">

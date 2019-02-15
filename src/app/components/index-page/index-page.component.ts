@@ -14,6 +14,7 @@ import { FormSubmit, Stops } from 'src/app/interfaces/stops.interface';
 })
 export class IndexPageComponent implements OnInit {
   tickets: Array<Tickets>;
+  filteredTickets: Array<Tickets>;
   curRates: CurrencyRates;
   currency: string;
   stopsCount: Array<number>;
@@ -37,7 +38,6 @@ export class IndexPageComponent implements OnInit {
     this.filterService.currentStopsCount.subscribe(
       (data: FormSubmit) => {
         this.stopsCount = data.stopsCount.map(el => el.stopCount);
-        console.log(this.stopsCount);
         this.filterTickets(this.tickets, this.stopsCount);
       },
       error => {
@@ -80,7 +80,11 @@ export class IndexPageComponent implements OnInit {
 
   filterTickets(tickets: Array<Tickets>, stopsCount: Array<number>) {
     if (stopsCount.some(el => el < 0)) {
-      return;
+      return (this.filteredTickets = tickets);
+    } else {
+      this.filteredTickets = tickets.filter(el => {
+        return stopsCount.indexOf(el.stops) >= 0;
+      });
     }
   }
 }
