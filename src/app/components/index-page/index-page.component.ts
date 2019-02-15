@@ -47,7 +47,7 @@ export class IndexPageComponent implements OnInit {
     this.getExchangeRates();
   }
 
-  getTickets() {
+  getTickets(): void {
     this.ticketsService
       .getTickets()
       .pipe(delay(200))
@@ -64,7 +64,7 @@ export class IndexPageComponent implements OnInit {
       );
   }
 
-  getExchangeRates() {
+  getExchangeRates(): void {
     this.currencyService.getExchangeRates().subscribe(
       (responce: Currency) => {
         this.curRates = responce.rates;
@@ -78,13 +78,25 @@ export class IndexPageComponent implements OnInit {
     );
   }
 
-  filterTickets(tickets: Array<Tickets>, stopsCount: Array<number>) {
+  filterTickets(tickets: Array<Tickets>, stopsCount: Array<number>): Array<Tickets> {
     if (stopsCount.some(el => el < 0)) {
       return (this.filteredTickets = tickets);
     } else {
       this.filteredTickets = tickets.filter(el => {
         return stopsCount.indexOf(el.stops) >= 0;
       });
+    }
+  }
+
+  sortTickets(condition: string): Array<Tickets> {
+    if (condition === 'up') {
+      return (this.filteredTickets = this.filteredTickets.sort((a, b) =>
+        a.stops >= b.stops ? 1 : -1
+      ));
+    } else {
+      return (this.filteredTickets = this.filteredTickets.sort((a, b) =>
+        a.stops > b.stops ? -1 : 1
+      ));
     }
   }
 }
