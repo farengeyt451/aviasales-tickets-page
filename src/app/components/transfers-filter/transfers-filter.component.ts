@@ -72,8 +72,6 @@ export class TransfersFilterComponent implements OnInit {
   }
 
   submit(value: StopFromForm): void {
-    console.log(value);
-
     const formValue = Object.assign({}, value, {
       stopsCount: this.formatData(value.stopsCount)
     });
