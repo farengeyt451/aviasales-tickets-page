@@ -8,7 +8,7 @@
       <label *ngFor="let stop of stopsRender.controls; let i=index" class="transfers-filter__option">
         <input class="transfers-filter__chose" type="checkbox" [formControl]="stop" (change)="submit(stopsForm.value)">
         <span class="transfers-filter__text" >{{ stops[i].option }}</span>
-        <button type="button" *ngIf="isShowingBtn(i)" class="transfers-filter__only" (click)="checkOne()">Только</button>
+        <button type="button" *ngIf="isShowingBtn(i)" class="transfers-filter__only" (click)="checkOne(i)">Только</button>
       </label>
     </form>
 

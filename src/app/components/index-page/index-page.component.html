@@ -10,7 +10,7 @@
 
       <div class="tickets__render">
 
-          <ng-container *ngIf="tickets">
+          <ng-container *ngIf="filteredTickets">
 
             <app-ticket *ngFor="let ticket of filteredTickets" [renderTicket]="ticket" [currencyType]="currency" [curRates]="curRates">
             </app-ticket>

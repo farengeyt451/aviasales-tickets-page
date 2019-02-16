@@ -27,6 +27,7 @@ export class IndexPageComponent implements OnInit {
 
   ngOnInit() {
     this.getTickets();
+    this.getExchangeRates();
 
     this.filterService.currentCurrencyType.subscribe(
       data => {
@@ -47,11 +48,9 @@ export class IndexPageComponent implements OnInit {
       }
     );
 
-    this.getExchangeRates();
-
     this.filterService.currentSortCondition.subscribe(
       data => {
-        data && this.sortTickets(data);
+        this.sortTickets(data);
       },
       error => {
         console.log(error);

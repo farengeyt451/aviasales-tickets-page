@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { FilterService } from '../../services/filter.service';
-import { StopsResponce, Stops } from '../../interfaces/stops.interface';
+import { StopsResponce, Stops, StopFromForm } from '../../interfaces/stops.interface';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -19,7 +19,7 @@ export class TransfersFilterComponent implements OnInit {
     this.getStopsCount();
   }
 
-  getStopsCount() {
+  getStopsCount(): void {
     this.filterService
       .getStopsCount()
       .pipe(delay(200))
@@ -38,7 +38,7 @@ export class TransfersFilterComponent implements OnInit {
   }
 
   // Func for async stopsForm init
-  initForm() {
+  initForm(): void {
     this.stopsForm = this.fb.group({
       stopsCount: this.buildStops()
     });
@@ -51,7 +51,7 @@ export class TransfersFilterComponent implements OnInit {
   }
 
   // Returning an array which consists from Form Controls
-  buildStops() {
+  buildStops(): FormArray {
     const arr = this.stops.map(stop => {
       return this.fb.control(stop.selected);
     });
@@ -59,7 +59,7 @@ export class TransfersFilterComponent implements OnInit {
   }
 
   // Formatting data for submitting
-  formatData(data: Array<boolean>) {
+  formatData(data: Array<boolean>): Array<Stops> {
     return data
       .map((el, i) => {
         return {
@@ -71,22 +71,26 @@ export class TransfersFilterComponent implements OnInit {
       .filter(el => el.selected === true);
   }
 
-  submit(value) {
+  submit(value: StopFromForm): void {
+    console.log(value);
+
     const formValue = Object.assign({}, value, {
       stopsCount: this.formatData(value.stopsCount)
     });
     this.filterService.changeStopsCount(formValue);
   }
 
-  isShowingBtn(index: number) {
+  isShowingBtn(index: number): boolean {
     return (this.stopsForm.controls.stopsCount as FormArray).controls[index].value;
   }
 
   // Func to uncheck all checkboxes
-  // Cuz checkboxes have (change) event on template this.submit will be called automatically
-  checkOne() {
-    (this.stopsForm.controls.stopsCount as FormArray).controls.forEach(el => {
-      el.setValue(false);
+  checkOne(i: number): void {
+    (this.stopsForm.controls.stopsCount as FormArray).controls.forEach((el, index) => {
+      if (el[index] !== i) {
+        el.setValue(false);
+      }
     });
+    this.submit(this.stopsForm.value);
   }
 }
