@@ -28,34 +28,9 @@ export class IndexPageComponent implements OnInit {
   ngOnInit() {
     this.getTickets();
     this.getExchangeRates();
-
-    this.filterService.currentCurrencyType.subscribe(
-      data => {
-        this.currency = data;
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-    this.filterService.currentStopsCount.subscribe(
-      (data: FormSubmit) => {
-        this.stopsCount = data.stopsCount.map(el => el.stopCount);
-        this.filterTickets(this.tickets, this.stopsCount);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-    this.filterService.currentSortCondition.subscribe(
-      data => {
-        this.sortTickets(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getStopsCount();
+    this.getCurrentCurrencyType();
+    this.getCurrentSortCondition();
   }
 
   getTickets(): void {
@@ -85,6 +60,40 @@ export class IndexPageComponent implements OnInit {
       },
       () => {
         console.log('Async fetching exchange rates complete');
+      }
+    );
+  }
+
+  getStopsCount() {
+    this.filterService.currentStopsCount.subscribe(
+      (data: FormSubmit) => {
+        this.stopsCount = data.stopsCount.map(el => el.stopCount);
+        this.filterTickets(this.tickets, this.stopsCount);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getCurrentCurrencyType() {
+    this.filterService.currentCurrencyType.subscribe(
+      data => {
+        this.currency = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getCurrentSortCondition() {
+    this.filterService.currentSortCondition.subscribe(
+      data => {
+        this.sortTickets(data);
+      },
+      error => {
+        console.log(error);
       }
     );
   }
