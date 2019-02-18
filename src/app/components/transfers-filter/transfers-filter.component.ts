@@ -31,7 +31,6 @@ export class TransfersFilterComponent implements OnInit {
           alert(err.message);
         },
         () => {
-          console.log('Async fetching stops count complete');
           this.initForm();
         }
       );

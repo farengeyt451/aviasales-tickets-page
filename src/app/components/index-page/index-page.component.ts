@@ -4,8 +4,9 @@ import { CurrencyService } from '../../services/currency.service';
 import { FilterService } from '../../services/filter.service';
 import { TicketsResponce, Tickets } from '../../interfaces/tickets.interface';
 import { Currency, CurrencyRates } from '../../interfaces/currency.interface';
+import { FormSubmit } from '../../interfaces/stops.interface';
 import { delay } from 'rxjs/operators';
-import { FormSubmit, Stops } from 'src/app/interfaces/stops.interface';
+import { Observable, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-index-page',
@@ -26,28 +27,31 @@ export class IndexPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getTickets();
+    this.renderTickets();
     this.getExchangeRates();
-    this.getStopsCount();
     this.getCurrentCurrencyType();
     this.getCurrentSortCondition();
   }
 
-  getTickets(): void {
-    this.ticketsService
-      .getTickets()
-      .pipe(delay(200))
-      .subscribe(
-        (responce: TicketsResponce) => {
-          this.tickets = responce.tickets;
-        },
-        err => {
-          alert(err.message);
-        },
-        () => {
-          console.log('Async fetching tickets complete');
-        }
-      );
+  renderTickets(): void {
+    combineLatest([this.getTickets(), this.getStopsCount()]).subscribe(
+      response => {
+        this.tickets = (response[0] as TicketsResponce).tickets;
+        this.stopsCount = (response[1] as FormSubmit).stopsCount.map(el => el.stopCount);
+        this.filterTickets(this.tickets, this.stopsCount);
+      },
+      err => {
+        alert(err);
+      }
+    );
+  }
+
+  getTickets(): Observable<Object> {
+    return this.ticketsService.getTickets().pipe(delay(200));
+  }
+
+  getStopsCount(): Observable<Object> {
+    return this.filterService.currentStopsCount;
   }
 
   getExchangeRates(): void {
@@ -57,26 +61,11 @@ export class IndexPageComponent implements OnInit {
       },
       err => {
         alert(err.message);
-      },
-      () => {
-        console.log('Async fetching exchange rates complete');
       }
     );
   }
 
-  getStopsCount() {
-    this.filterService.currentStopsCount.subscribe(
-      (data: FormSubmit) => {
-        this.stopsCount = data.stopsCount.map(el => el.stopCount);
-        this.filterTickets(this.tickets, this.stopsCount);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
-  getCurrentCurrencyType() {
+  getCurrentCurrencyType(): void {
     this.filterService.currentCurrencyType.subscribe(
       data => {
         this.currency = data;
@@ -87,7 +76,7 @@ export class IndexPageComponent implements OnInit {
     );
   }
 
-  getCurrentSortCondition() {
+  getCurrentSortCondition(): void {
     this.filterService.currentSortCondition.subscribe(
       data => {
         this.sortTickets(data);
